@@ -1,5 +1,4 @@
 set nocompatible
-filetype plugin on
 syntax on
 syntax enable
 
@@ -11,22 +10,20 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " -- Start my plugins --
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'https://github.com/pangloss/vim-javascript.git'
-Plugin 'https://github.com/rakr/vim-one.git'
+Plugin 'pangloss/vim-javascript'
+Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'chriskempson/base16-vim'
 Plugin 'https://github.com/morhetz/gruvbox.git'
-Plugin 'junegunn/fzf.vim'
+Plugin 'ayu-theme/ayu-vim'
 " -- End my plugins --
 
 " All of your Plugins must be added before the following line
 call vundle#end()
 filetype plugin indent on
 
+let g:airline#extensions#tabline#enabled = 1
 " Use true colors
 if (empty($TMUX))
   if (has("nvim"))
@@ -44,13 +41,16 @@ endif
 if &term == 'putty-256color'
     set term=screen-256color
     set t_Co=256
-    set background=light
+    set background=dark
     source ~/.vimrc_background
 endif
 
 " one colorscheme settings
-set t_Co=256
+set background=dark
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 let g:one_allow_italics = 1
+let g:gruvbox_contrast_dark="hard"
 colorscheme gruvbox
 
 " Setup fzf stuff
@@ -79,8 +79,8 @@ nnoremap <F1> zMzv
 nnoremap <F2> zR
 
 " -- Start syntax shit --
+autocmd BufNewFile,BufRead *.svelte set syntax=html
 filetype plugin indent on
-set background=dark
 set encoding=utf-8
 set hidden
 set showcmd
@@ -107,11 +107,12 @@ set mouse=
 set nocompatible
 set backup
 set backupdir=~/.vim_backup
+set backupcopy=yes
 set noswapfile
 set fileformats=unix,dos,mac
 set laststatus=2
 set expandtab
-set softtabstop=4 tabstop=4 shiftwidth=4
+set softtabstop=2 tabstop=2 shiftwidth=2
 set ruler
 set wildignore=*.swp,*.bak
 set wildmode=longest,list
@@ -121,5 +122,6 @@ set foldlevel=6
 
 " Turn on cursorline
 set cursorline
+
 
 
