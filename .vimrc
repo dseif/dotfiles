@@ -1,6 +1,5 @@
 set nocompatible
-syntax on
-syntax enable
+filetype off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -17,10 +16,18 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'https://github.com/morhetz/gruvbox.git'
 Plugin 'ayu-theme/ayu-vim'
+Plugin 'dense-analysis/ale'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'prettier/vim-prettier'
+Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
+Plugin 'evanleck/vim-svelte'
 " -- End my plugins --
 
 " All of your Plugins must be added before the following line
 call vundle#end()
+
+syntax on
+syntax enable
 filetype plugin indent on
 
 let g:airline#extensions#tabline#enabled = 1
@@ -68,6 +75,8 @@ map <S-U> 10<C-E>
 " Go to next/prev buffer
 map <C-J> :bnext<CR>
 map <C-K> :bprev<CR>
+" Close buffer
+map <C-W> :bd<CR>
 
 " Highlighting
 hi SpecialKey ctermfg=3
@@ -123,5 +132,13 @@ set foldlevel=6
 " Turn on cursorline
 set cursorline
 
+" Set all .hbs files to read as html
+au BufReadPost *.hbs set syntax=html
+
+" Prettier config
+let g:prettier#exec_cmd_path = "~/development/Privy/node_modules/.bin/prettier"
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx PrettierAsync
 
 
+let g:instant_markdown_browser = "google-chrome --new-window"
