@@ -17,10 +17,9 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'https://github.com/morhetz/gruvbox.git'
 Plugin 'ayu-theme/ayu-vim'
 Plugin 'dense-analysis/ale'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'prettier/vim-prettier'
 Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
-Plugin 'evanleck/vim-svelte'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 " -- End my plugins --
 
 " All of your Plugins must be added before the following line
@@ -29,6 +28,9 @@ call vundle#end()
 syntax on
 syntax enable
 filetype plugin indent on
+
+" CoC extensions
+let g:coc_global_extensions = ['coc-tsserver']
 
 let g:airline#extensions#tabline#enabled = 1
 " Use true colors
@@ -78,6 +80,16 @@ map <C-K> :bprev<CR>
 " Close buffer
 map <C-W> :bd<CR>
 
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 " Highlighting
 hi SpecialKey ctermfg=3
 hi Folded ctermfg=87 ctermbg=232
@@ -121,13 +133,14 @@ set noswapfile
 set fileformats=unix,dos,mac
 set laststatus=2
 set expandtab
-set softtabstop=2 tabstop=2 shiftwidth=2
+set softtabstop=4 tabstop=4 shiftwidth=4
 set ruler
 set wildignore=*.swp,*.bak
 set wildmode=longest,list
 set foldenable
 set foldmethod=indent
 set foldlevel=6
+set re=2
 
 " Turn on cursorline
 set cursorline
@@ -139,6 +152,5 @@ au BufReadPost *.hbs set syntax=html
 let g:prettier#exec_cmd_path = "~/development/Privy/node_modules/.bin/prettier"
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx PrettierAsync
-
 
 let g:instant_markdown_browser = "google-chrome --new-window"
